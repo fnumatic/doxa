@@ -1,0 +1,8 @@
+{
+ :min-bb-version "0.3.6"
+ :tasks
+ {:requires  ([babashka.fs :as fs])
+  ;;updates
+  update-deps {:task (shell "clojure -Aoutdated -a outdated --write")}
+
+  }}
