@@ -519,7 +519,7 @@
      (idents? id) (mapv (fn [id'] (pull* db query id')) id))))
 
 (comment
-  (pull @)
+  ;;(pull @)
 
   (enc/qb 1e5
     (pull @conn_ [:name {:friend [:name {:friend [:name :age]}]}] [:db/id :ivan]))
