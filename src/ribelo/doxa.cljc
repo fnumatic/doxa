@@ -376,17 +376,18 @@
     :friend    [:db/id :petr]
     :age       55}])
 
-(require '[ribelo.doxa :as dx])
+(comment
+  (require '[ribelo.doxa :as dx])
 
-(def db (create-dx data))
+  (def db (create-dx data))
 ;; #:db{:id {:ivan  {:db/id :ivan,  :name "Ivan",  :last-name "Ivanov", :age 30, :friend [:db/id :petr]},
 ;;           :petr  {:db/id :petr,  :name "Petr",  :last-name "Petrov", :age 15, :friend [[:db/id :smith] [:db/id :ivan]]},
 ;;           :smith {:db/id :smith, :name "Smith", :last-name "Smith",  :age 55, :friend [:db/id :petr]}}}
 
-(dx/commit db [[:dx/put
-                {:db/id :oleg
-                 :name "Oleg"
-                 :friend [{:db/id :fedor :name "Fedor" :friend {:db/id :denis}}]}]])
+  (dx/commit db [[:dx/put
+                  {:db/id :oleg
+                   :name "Oleg"
+                   :friend [{:db/id :fedor :name "Fedor" :friend {:db/id :denis}}]}]]))
 
 (comment
   (def txs
