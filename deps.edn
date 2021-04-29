@@ -1,7 +1,11 @@
 {:paths ["src" "resources"]
- :deps  {meander/epsilon        {:mvn/version "0.0.598"}
-         com.taoensso/encore    {:mvn/version "3.10.1"}
+ :aliases {
+            :outdated {:extra-deps {olical/depot {:mvn/version "2.2.0"}}
+                      :main-opts  ["-m" "depot.outdated.main"]}
+ }
+ :deps  {meander/epsilon        {:mvn/version "0.0.602"}
+         com.taoensso/encore    {:mvn/version "3.19.0"}
          com.taoensso/timbre    {:mvn/version "5.1.2"}
-         thheller/shadow-cljs   {:mvn/version "2.11.15"}
-         edn-query-language/eql {:mvn/version "1.0.2"}
+         thheller/shadow-cljs   {:mvn/version "2.12.5"}
+         edn-query-language/eql {:mvn/version "2021.02.28"}
          juji/editscript        {:mvn/version "0.5.7"}}}
