@@ -545,7 +545,7 @@
 
 ;; * datalog
 
-(defn build-args-map [in args]
+#_(defn build-args-map [in args]
   (m/rewrite [in args]
     [[!ins ..?n] [!args ..?n]]
     {& [(m/cata [!ins !args]) ...]}
