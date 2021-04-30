@@ -391,30 +391,24 @@
 
 (comment
   (def txs
-    [[:dx/put
-      {:db/id     :ivan
-       :name      "Ivan"
-       :last-name "Ivanov"
-       :friend    [:db/id :petr]
-       :age       30}]
-     [:dx/put
-      {:db/id     :petr
-       :name      "Petr"
-       :last-name "Petrov"
-       :friend    [[:db/id :smith] [:db/id :ivan]]
-       :age       15}]
-     [:dx/put
-      {:db/id     [:smith "Smith"]
-       :name      "Smith"
-       :last-name "Smith"
-       :friend    [:db/id :petr]
-       :age       55}]])
+    [{:db/id     :ivan
+      :name      "Ivan"
+      :last-name "Ivanov"
+      :friend    [:db/id :petr]
+      :age       30}
+     {:db/id     :petr
+      :name      "Petr"
+      :last-name "Petrov"
+      :friend    [[:db/id :smith] [:db/id :ivan]]
+      :age       15}
+     {:db/id     [:smith "Smith"]
+      :name      "Smith"
+      :last-name "Smith"
+      :friend    [:db/id :petr]
+      :age       55}])
 
-  (commit {} txs)
-
-  (def conn_ (atom (create-dx)))
-
-  (commit! conn_ txs))
+  (def conn_ (atom (create-dx txs)))
+  )
 
 (defn- -rev-keyword? [k]
   (enc/str-starts-with? (name k) "_"))
@@ -619,7 +613,6 @@
       (build-args-map)))
 
 (defn datalog->meander [{:keys [where in args] :as q}]
-  (println q)
   (let [args-map (build-args-map q)]
     (loop [[arg-map & more] args-map r []]
       (if arg-map
@@ -676,6 +669,10 @@
                      [?e :name ?name]
                      [?e :age ?age]]
                    [["Ivan" 20] ["Petr" 30]])
+      (datalog->meander))
+  (-> (parse-query '[:find (pull [:*] [?table ?e])
+                     :where
+                     [?e :name "Ivan"]])
       (datalog->meander)))
 
 #?(:clj
@@ -752,8 +749,7 @@
    @conn_ :sex
    (fn [{:keys [diff]}]
      (doseq [elem diff]
-       (when (match-diff? [:ivan nil] elem)
-         (println "działa")))))
+       (when (match-diff? [:ivan nil] elem)))))
 
   (commit! conn_ [[::put :petr :age 32]]))
 
