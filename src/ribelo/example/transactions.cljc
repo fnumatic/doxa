@@ -1,4 +1,4 @@
-(ns ribelo.example.examples1
+(ns ribelo.example.transactions
   (:require [ribelo.doxa :as dx]))
 
 (def data [{:db/id 1 :name "Petr" :aka ["Devil"]}])
@@ -119,3 +119,6 @@
                [:dx/put [:db/id 1] :sex :male]])
 ;; => #:db{:id {1 {:db/id 1, :name "Petr", :aka ["Devil"], :sex :male}}}
 
+(comment
+  (+ 2 2)
+  ,)
