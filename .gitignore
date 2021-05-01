@@ -2,3 +2,4 @@
 .calva/
 .cpcache/
 .lsp/
+.clj-kondo
