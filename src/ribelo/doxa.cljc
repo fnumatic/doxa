@@ -798,7 +798,7 @@
     ?x ?x))
 
 
-(defn build-meander-query [m]
+#_(defn build-meander-query [m]
   (m/rewrite m
     {:maps   (m/pred seq [!maps ..?mc])
      :guards (m/pred seq [!guards ..?gc])
